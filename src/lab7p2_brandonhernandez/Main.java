@@ -403,6 +403,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnCrearUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearUserMouseClicked
         Usuario n = new Usuario(name.getText(), nUser.getText(), nPass.getText());
+        usuarios.add(n);
         JOptionPane.showMessageDialog(vCrearUser, "Usuario Creado");
     }//GEN-LAST:event_btnCrearUserMouseClicked
 
