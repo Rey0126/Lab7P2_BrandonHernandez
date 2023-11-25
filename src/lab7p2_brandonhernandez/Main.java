@@ -1,15 +1,12 @@
 package lab7p2_brandonhernandez;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Main extends javax.swing.JFrame {
 
-    private ArrayList<Usuario> usuarios = new ArrayList();
-    private ArrayList<Rest> restaurantes = new ArrayList();
     private AdminUsuarios ad = new AdminUsuarios("./Usuarios.txt");
     private AdminRest adr = new AdminRest("./Restaurantes.txt");
     private Usuario actual;
@@ -75,10 +72,11 @@ public class Main extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        ubiRest1 = new javax.swing.JTextField();
-        nombreRest1 = new javax.swing.JTextField();
+        precioProducto = new javax.swing.JTextField();
+        nombreProducto = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
         btnAgregarProduc = new javax.swing.JButton();
+        cbRest = new javax.swing.JComboBox<>();
         jPanel11 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -501,52 +499,64 @@ public class Main extends javax.swing.JFrame {
         jLabel30.setText("Precio:");
 
         jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel31.setText("Agregar Prodcuto");
+        jLabel31.setText("Agregar Producto");
 
         btnAgregarProduc.setText("Agregar");
+        btnAgregarProduc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregarProducMouseClicked(evt);
+            }
+        });
+
+        cbRest.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(176, Short.MAX_VALUE)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel29)
-                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(cbRest, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(245, 245, 245))
+            .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(ubiRest1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(290, 290, 290)
+                        .addComponent(btnAgregarProduc))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(163, 163, 163)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nombreRest1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel29)
+                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(precioProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                                .addComponent(jLabel31)
-                                .addGap(70, 70, 70)))))
-                .addGap(177, 177, 177))
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(291, 291, 291)
-                .addComponent(btnAgregarProduc)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(nombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel31)
-                .addGap(59, 59, 59)
+                .addGap(32, 32, 32)
+                .addComponent(cbRest, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
-                    .addComponent(nombreRest1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
-                    .addComponent(ubiRest1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(66, 66, 66)
+                    .addComponent(precioProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
                 .addComponent(btnAgregarProduc)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Agregar Producto", jPanel10);
@@ -575,7 +585,7 @@ public class Main extends javax.swing.JFrame {
             .addGap(0, 362, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab4", jPanel18);
+        jTabbedPane1.addTab("Informacion Restaurantes", jPanel18);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -796,8 +806,26 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnAgregarRestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarRestMouseClicked
-
+        Rest r = new Rest(nombreRest.getText(),ubiRest.getText());
+        adr.cargarArchivo();
+        adr.getRestaurantes().add(r);
+        JOptionPane.showMessageDialog(vAdmin, "Restaurante Agregado");
+        try {
+            adr.escribirArchivo();
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (Rest rs : adr.getRestaurantes()) {
+            cbRest.addItem(rs.getName());
+        }
     }//GEN-LAST:event_btnAgregarRestMouseClicked
+
+    private void btnAgregarProducMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProducMouseClicked
+        if(cbRest.getSelectedIndex() >= 0){
+            Producto p = new Producto(nombreProducto.getText(), Double.parseDouble(precioProducto.getText()));
+            
+        }
+    }//GEN-LAST:event_btnAgregarProducMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -858,6 +886,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton btnVolver2;
+    private javax.swing.JComboBox<String> cbRest;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -916,15 +945,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField newName;
     private javax.swing.JTextField newPass;
     private javax.swing.JTextField newUser;
+    private javax.swing.JTextField nombreProducto;
     private javax.swing.JTextField nombreRest;
-    private javax.swing.JTextField nombreRest1;
     private javax.swing.JTextField pass;
     private javax.swing.JTextField pass1;
     private javax.swing.JTextField pass2;
     private javax.swing.JTextField pass3;
     private javax.swing.JTextField pass4;
+    private javax.swing.JTextField precioProducto;
     private javax.swing.JTextField ubiRest;
-    private javax.swing.JTextField ubiRest1;
     private javax.swing.JTextField user;
     private javax.swing.JTextField user1;
     private javax.swing.JTextField user2;
