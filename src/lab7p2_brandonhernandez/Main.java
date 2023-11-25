@@ -109,9 +109,9 @@ public class Main extends javax.swing.JFrame {
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addGap(62, 62, 62)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
                 .addComponent(btnComprar)
                 .addGap(105, 105, 105))
         );
@@ -120,12 +120,12 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGap(204, 204, 204)
-                        .addComponent(btnComprar)))
-                .addContainerGap(73, Short.MAX_VALUE))
+                        .addComponent(btnComprar))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Restaurantes", jPanel13);
@@ -899,7 +899,8 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(vAdmin, "Producto Agregado");
             }
         }
-
+        
+        //Agregar al arbol del admin
         DefaultTreeModel modelo = (DefaultTreeModel) jtRestAdmin.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
 
@@ -910,6 +911,19 @@ public class Main extends javax.swing.JFrame {
         nodoRest.add(produc);
         raiz.add(nodoRest);
         modelo.reload();
+        
+        //Agregar al arbol del usuario
+        DefaultTreeModel m = (DefaultTreeModel) jtRest.getModel();
+        DefaultMutableTreeNode r = (DefaultMutableTreeNode) modelo.getRoot();
+
+        DefaultMutableTreeNode nodoP = new DefaultMutableTreeNode(nombreRest.getText());
+
+        DefaultMutableTreeNode product = new DefaultMutableTreeNode(nombreProducto.getText());
+        
+        nodoP.add(product);
+        r.add(nodoP);
+        m.reload();
+        
 
         nombreProducto.setText("");
         precioProducto.setText("");

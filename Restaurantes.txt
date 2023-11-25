@@ -1,1 +1,1 @@
-[Nombre:Italiano,Ubicacion:europa,Saldo:0.0,Productos:[]]
+[Nombre:Chino,Ubicacion:La Kennedy,Saldo:0.0,Productos:[]]
