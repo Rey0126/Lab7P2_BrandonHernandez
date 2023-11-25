@@ -43,7 +43,7 @@ public class AdminRest {
             fw = new FileWriter(archivo, false);
             bw = new BufferedWriter(fw);
             for (Rest r : restaurantes) {
-                  bw.write("[Nombre:"+r.getName() + ",Ubicacion:" + r.getUbi()+ "]\n");
+                  bw.write("[Nombre:"+r.getName() + ",Ubicacion:" + r.getUbi()+ ",Saldo:" + r.getSaldo() + ",Productos:" + r.getProductos() + "]\n");
             }
             bw.flush();
         } catch (Exception ex) {
@@ -59,13 +59,17 @@ public class AdminRest {
             try {
                 sc = new Scanner(archivo);
                 String x = "";
-                x += sc.next();
+                x += sc.nextLine();
                 x = x.replace("[Nombre:","");
                 x = x.replace("Ubicacion:","");
+                x = x.replace("Saldo:","");
+                x = x.replace("Productos:","");
                 x = x.replace("]","");
                 String[] temp = x.split(",");
                 while (sc.hasNext()) {
                     restaurantes.add(new Rest(temp[0], temp[1]));
+                    Rest r = new Rest();
+                    r.setSaldo(Double.parseDouble(temp[2]));
                 }
             } catch (Exception ex) {
             }

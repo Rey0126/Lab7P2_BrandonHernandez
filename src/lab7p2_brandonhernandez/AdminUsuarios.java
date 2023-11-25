@@ -61,7 +61,7 @@ public class AdminUsuarios {
             try {
                 sc = new Scanner(archivo);
                 String x = "";
-                x += sc.next();
+                x += sc.nextLine();
                 x = x.replace("[Nombre:","");
                 x = x.replace("Ususario:","");
                 x = x.replace("Contraseña:","");

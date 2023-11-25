@@ -10,8 +10,11 @@ public class Main extends javax.swing.JFrame {
 
     private ArrayList<Usuario> usuarios = new ArrayList();
     private ArrayList<Rest> restaurantes = new ArrayList();
+    private AdminUsuarios ad = new AdminUsuarios("./Usuarios.txt");
+    private AdminRest adr = new AdminRest("./Restaurantes.txt");
     private Usuario actual;
     private Rest actualRest;
+
     public Main() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -101,9 +104,9 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addComponent(btnComprar)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addGap(105, 105, 105))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,7 +116,7 @@ public class Main extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
+                        .addGap(204, 204, 204)
                         .addComponent(btnComprar)))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
@@ -192,7 +195,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(160, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Modificar", jPanel16);
+        jTabbedPane2.addTab("Modificar Usuario", jPanel16);
 
         btnEliminar.setText("Eliminar Usuario");
         btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -218,7 +221,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(256, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Eliminar", jPanel17);
+        jTabbedPane2.addTab("Eliminar Usuario", jPanel17);
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -440,6 +443,11 @@ public class Main extends javax.swing.JFrame {
         jLabel27.setText("Ubicacion:");
 
         btnAgregarRest.setText("Agregar");
+        btnAgregarRest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregarRestMouseClicked(evt);
+            }
+        });
 
         jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel28.setText("Agregar Restaurante");
@@ -700,13 +708,13 @@ public class Main extends javax.swing.JFrame {
 
     private void btnIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMouseClicked
         boolean acceder = false;
-        for (Usuario u : usuarios) {
+        for (Usuario u : ad.getUsuarios()) {
             if (u.getUser().equals(user.getText()) && u.getPass().equals(pass.getText())) {
                 vUsuario.pack();
                 vUsuario.setVisible(true);
                 vUsuario.setLocationRelativeTo(null);
                 acceder = true;
-                actual = usuarios.get(usuarios.indexOf(u));
+                actual = u;
             }
         }
 
@@ -732,13 +740,11 @@ public class Main extends javax.swing.JFrame {
 
     private void btnCrearUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearUserMouseClicked
         Usuario n = new Usuario(name.getText(), nUser.getText(), nPass.getText(), 0);
-        usuarios.add(n);
+        ad.cargarArchivo();
+        ad.getUsuarios().add(n);
         JOptionPane.showMessageDialog(vCrearUser, "Usuario Creado");
-        AdminUsuarios user = new AdminUsuarios("./Usuario.txt");
-        user.cargarArchivo();
-        user.getUsuarios().add(n);
         try {
-            user.escribirArchivo();
+            ad.escribirArchivo();
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -758,7 +764,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolver2MouseClicked
 
     private void btnIngresarAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarAdminMouseClicked
-        if(adminUser.getText().equals("admin") && adminPass.getText().equals("admin")){
+        if (adminUser.getText().equals("admin") && adminPass.getText().equals("admin")) {
             vLogInAdmin.setVisible(false);
             vAdmin.pack();
             vAdmin.setLocationRelativeTo(null);
@@ -767,15 +773,31 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIngresarAdminMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        usuarios.remove(actual);
+        ad.cargarArchivo();
+        ad.getUsuarios().remove(actual);
+        try {
+            ad.escribirArchivo();
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showConfirmDialog(vUsuario, "Usuario Eliminado");
+        vUsuario.setVisible(false);
+        this.setVisible(true);
     }//GEN-LAST:event_btnEliminarMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
         actual.setName(newName.getText());
         actual.setUser(newUser.getText());
         actual.setPass(newPass.getText());
+        newName.setText("");
+        newUser.setText("");
+        newPass.setText("");
         JOptionPane.showMessageDialog(vUsuario, "Usuario Modificado");
     }//GEN-LAST:event_btnModificarMouseClicked
+
+    private void btnAgregarRestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarRestMouseClicked
+
+    }//GEN-LAST:event_btnAgregarRestMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
