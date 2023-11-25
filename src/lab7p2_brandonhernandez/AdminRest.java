@@ -36,16 +36,14 @@ public class AdminRest {
     }
 
     //metodos de administracion
-    public void escribirArchivo() throws IOException {
+   public void escribirArchivo() throws IOException {
         FileWriter fw = null;
         BufferedWriter bw = null;
         try {
             fw = new FileWriter(archivo, false);
             bw = new BufferedWriter(fw);
-            for (Rest t : restaurantes) {
-//                bw.write(t.getCodigo() + ";");
-//                bw.write(t.getNombre() + ";");
-//                bw.write(t.getedad() + ";");
+            for (Rest r : restaurantes) {
+                  bw.write("[Nombre:"+r.getName() + ",Ubicacion:" + r.getUbi()+ "]\n");
             }
             bw.flush();
         } catch (Exception ex) {
@@ -60,9 +58,14 @@ public class AdminRest {
         if (archivo.exists()) {
             try {
                 sc = new Scanner(archivo);
-                sc.useDelimiter("]");
+                String x = "";
+                x += sc.next();
+                x = x.replace("[Nombre:","");
+                x = x.replace("Ubicacion:","");
+                x = x.replace("]","");
+                String[] temp = x.split(",");
                 while (sc.hasNext()) {
-                    restaurantes.add(new Rest(sc.next(),sc.next()));
+                    restaurantes.add(new Rest(temp[0], temp[1]));
                 }
             } catch (Exception ex) {
             }

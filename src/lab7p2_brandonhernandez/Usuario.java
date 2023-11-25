@@ -10,7 +10,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String name, String user, String pass) {
+    public Usuario(String name, String user, String pass, double saldo) {
         this.name = name;
         this.user = user;
         this.pass = pass;

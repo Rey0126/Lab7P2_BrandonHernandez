@@ -45,9 +45,7 @@ public class AdminUsuarios {
             fw = new FileWriter(archivo, false);
             bw = new BufferedWriter(fw);
             for (Usuario u : usuarios) {
-//                bw.write(u.getName() + ";");
-//                bw.write(u.get() + ";");
-//                bw.write(u.getedad() + ";");
+                  bw.write("[Nombre:"+u.getName() + ",Usuario:" + u.getUser() + ",Contraseña:" + u.getPass() + ",Saldo:" + u.getSaldo() + "]\n");
             }
             bw.flush();
         } catch (Exception ex) {
@@ -62,9 +60,16 @@ public class AdminUsuarios {
         if (archivo.exists()) {
             try {
                 sc = new Scanner(archivo);
-                sc.useDelimiter("]");
+                String x = "";
+                x += sc.next();
+                x = x.replace("[Nombre:","");
+                x = x.replace("Ususario:","");
+                x = x.replace("Contraseña:","");
+                x = x.replace("Saldo:","");
+                x = x.replace("]","");
+                String[] temp = x.split(",");
                 while (sc.hasNext()) {
-                    usuarios.add(new Usuario(sc.next(), sc.next(), sc.next()));
+                    usuarios.add(new Usuario(temp[0], temp[1], temp[2], Double.parseDouble(temp[3])));
                 }
             } catch (Exception ex) {
             }
